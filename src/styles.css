@@ -30,6 +30,11 @@ body {
 .btn:focus {
   outline: none;
 }
+
+button.is-hidden {
+  display: none;
+}
+
 ul.gallery {
   display: grid;
   width: 1200px;

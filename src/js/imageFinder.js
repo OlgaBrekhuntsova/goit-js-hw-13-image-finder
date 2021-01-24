@@ -2,15 +2,17 @@ import refs from './refs';
 import {error } from './pnotify.js';
 import apiService from './apiService';
 import galleryMarkup from './galleryMarkup';
+let prevScrollHeight = 0;
 refs.searchForm.addEventListener('submit', event => {
     event.preventDefault();
     apiService.query = event.currentTarget.elements.query.value.toLowerCase();
     apiService.resetPageNumber();
+    refs.loadMoreBtn.classList.add('is-hidden');
     refs.galleryOutput.innerHTML = '';
     refs.searchForm.reset();
     if (apiService.query !== "") {
-        apiService.getGalleryList()
-            .then(hits => { galleryMarkup(hits); });
+        fetchGalleryList();
+       
     }
     else {
         return error({
@@ -21,9 +23,20 @@ refs.searchForm.addEventListener('submit', event => {
     }
    });
 refs.loadMoreBtn.addEventListener('click', () => {
-           apiService.getGalleryList()
-            .then(hits => {
-                galleryMarkup(hits);
-            }); 
+           fetchGalleryList(); 
 });
-
+function fetchGalleryList() {
+    apiService.getGalleryList()
+        .then(hits => {
+        if (apiService.searchSuccess) { refs.loadMoreBtn.classList.remove('is-hidden'); };
+                galleryMarkup(hits);
+            scrollToRenderStart();
+        });
+    
+};
+function scrollToRenderStart() {
+            window.scrollTo({
+  top: prevScrollHeight,
+        });
+    prevScrollHeight = document.documentElement.offsetHeight-70;
+ };

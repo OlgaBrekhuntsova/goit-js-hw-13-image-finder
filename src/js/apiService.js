@@ -3,7 +3,8 @@ const key = '19987924-b7a96d980a74a373c9da34c4a';
 const url = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal';
 export default {
 searchQuery: '',
-pageNumber: 1,
+    pageNumber: 1,
+    searchSuccess: false,
     getGalleryList() {
                     return fetch(`${url}&q=${this.searchQuery}&page=${this.pageNumber}&per_page=12&key=${key}`)
                 .then(response => { return response.json(); })
@@ -13,6 +14,7 @@ pageNumber: 1,
                             title: 'Successful search!',
                             text: `We've got ${data.total} images for you.`
                         });
+                        this.searchResult(true);
                         return data;
                     }
                     else { throw new Error() };
@@ -21,7 +23,8 @@ pageNumber: 1,
                     this.incrementPageNumber();
                     return hits;
                 })
-                .catch((e) => {
+                        .catch((e) => {
+                     this.searchResult(false);
                     error({
                         title: 'Ooops! 🤷',
                         text: 'There is no matches. Try another query.',
@@ -35,5 +38,6 @@ pageNumber: 1,
  },
     get query() { return this.searchQuery; },
     set query(value) { return this.searchQuery = value;},
+    searchResult(status) {this.searchSuccess = status; },
 };
 
