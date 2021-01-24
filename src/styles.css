@@ -80,6 +80,17 @@ img {
   display: flex;
   margin-block-end: 0px;
 }
+div[data-pnotify].pnotify.material-elem.pnotify-mode-light {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pnotify-title .pnotify-pre-line {
+  font-weight: bold;
+}
+.pnotify-pre-line {
+  font-size: 16px;
+  color: #535252;
+}
 /* .gallery__image:hover {
   transform: scale(1.03);
 }

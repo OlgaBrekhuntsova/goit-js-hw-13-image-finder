@@ -1,4 +1,4 @@
-import { defaults } from 'autoprefixer';
+// import { defaults } from 'autoprefixer';
 import apiService from './apiService';
 import galleryMarkup from './galleryMarkup';
 // const input = document.querySelector('input[name=query]');
