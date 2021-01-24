@@ -1,7 +1,7 @@
 import galleryMarkupTemplate from '../templates/gallery.hbs';
-// const galleryOutput = document.querySelector('.gallery');
-import galleryOutput from './imageFinder';
+// import galleryOutput from './imageFinder';
+import refs from './refs';
 function galleryMarkup(galleryItems) {
-        return galleryOutput.insertAdjacentHTML('beforeend', galleryMarkupTemplate(galleryItems))
+        return refs.galleryOutput.insertAdjacentHTML('beforeend', galleryMarkupTemplate(galleryItems))
 };
 export default galleryMarkup;

@@ -1,26 +1,29 @@
-// import { defaults } from 'autoprefixer';
+import refs from './refs';
+import {error } from './pnotify.js';
 import apiService from './apiService';
 import galleryMarkup from './galleryMarkup';
-// const input = document.querySelector('input[name=query]');
-const searchForm = document.querySelector('#search-form');
-// const submitBtn = document.querySelector('.js-submit-btn');
-const loadMoreBtn = document.querySelector('.js-load-more-btn');
-const galleryOutput = document.querySelector('.gallery');
-searchForm.addEventListener('submit', event => {
+refs.searchForm.addEventListener('submit', event => {
     event.preventDefault();
     apiService.query = event.currentTarget.elements.query.value.toLowerCase();
     apiService.resetPageNumber();
-    galleryOutput.innerHTML = '';
-    searchForm.reset();
-    apiService.getGalleryList()
-   .then(hits=> { galleryMarkup(hits);});
-
+    refs.galleryOutput.innerHTML = '';
+    refs.searchForm.reset();
+    if (apiService.query !== "") {
+        apiService.getGalleryList()
+            .then(hits => { galleryMarkup(hits); });
+    }
+    else {
+        return error({
+            title: 'Search error 🤷',
+            text: 'Enter at least one symbol',
+            type: 'error'
+        });
+    }
    });
-loadMoreBtn.addEventListener('click', () => {
-    apiService.getGalleryList()
-        .then(hits => {
-            galleryMarkup(hits);
-               });
+refs.loadMoreBtn.addEventListener('click', () => {
+           apiService.getGalleryList()
+            .then(hits => {
+                galleryMarkup(hits);
+            }); 
 });
 
-export default galleryOutput;

@@ -5,8 +5,7 @@ export default {
 searchQuery: '',
 pageNumber: 1,
     getGalleryList() {
-        if (this.searchQuery !== "") {
-            return fetch(`${url}&q=${this.searchQuery}&page=${this.pageNumber}&per_page=12&key=${key}`)
+                    return fetch(`${url}&q=${this.searchQuery}&page=${this.pageNumber}&per_page=12&key=${key}`)
                 .then(response => { return response.json(); })
                 .then((data) => {
                     if (data.total > 0) {
@@ -22,15 +21,14 @@ pageNumber: 1,
                     this.incrementPageNumber();
                     return hits;
                 })
-                .catch(() => {
+                .catch((e) => {
                     error({
-                        title: 'Ooops! Something went wrong 🤷',
-                        text: 'e.message',
+                        title: 'Ooops! 🤷',
+                        text: 'There is no matches. Try another query.',
                         type: 'error'
                     });
                 })
-        }        
-        else { console.log('Enter at least 1 symbol') };
+       
     },
     incrementPageNumber() { this.pageNumber += 1;},
     resetPageNumber() {this.pageNumber = 1;
