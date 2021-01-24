@@ -1,6 +1,6 @@
 const key = '19987924-b7a96d980a74a373c9da34c4a';
 const url = 'https://pixabay.com/api/?image_type=photo&orientation=horizontal';
-const apiService = {
+export default {
 searchQuery: '',
 pageNumber: 1,
     getGalleryList() {
@@ -8,7 +8,7 @@ pageNumber: 1,
             return fetch(`${url}&q=${this.searchQuery}&page=${this.pageNumber}&per_page=12&key=${key}`)
                 .then(response => { return response.json(); })
                 .then(({ hits }) => {
-                    this.pageNumber += 1;
+                    this.incrementPageNumber();
                     return hits;
                 })
             // .then((data) => {
@@ -18,10 +18,10 @@ pageNumber: 1,
         }
         else { console.log('Enter at least 1 symbol') }
     },
+    incrementPageNumber() { this.pageNumber += 1;},
     resetPageNumber() {this.pageNumber = 1;
  },
     get query() { return this.searchQuery; },
     set query(value) { return this.searchQuery = value;},
 };
 
-export default apiService;
