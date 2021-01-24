@@ -25,6 +25,7 @@ body {
 .search-form {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 25px;
 }
 .btn:focus {
   outline: none;
@@ -51,6 +52,7 @@ div.photo-card {
   height: 85%;
   overflow-y: hidden;
   overflow-x: hidden;
+  margin-bottom: 5px;
 }
 
 img {
@@ -68,7 +70,7 @@ img {
   padding-right: 15px;
   padding-left: 15px;
   font-size: 12px;
-  height: 15%;
+  /* height: 15%; */
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
@@ -76,6 +78,7 @@ img {
   align-items: center;
   align-self: center;
   display: flex;
+  margin-block-end: 0px;
 }
 /* .gallery__image:hover {
   transform: scale(1.03);
